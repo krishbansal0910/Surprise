@@ -29,7 +29,7 @@ body {
 .card {
     background: white;
     border-radius: 28px;
-    padding: 24px;
+    padding: 26px;
     max-width: 360px;
     width: 100%;
     box-shadow: 0 30px 80px rgba(0,0,0,0.25);
@@ -41,10 +41,12 @@ body {
     margin-bottom: 16px;
 }
 
-h1 {
+h1, .big {
     font-family: 'Playfair Display', serif;
+}
+
+h1 {
     color: #ff3b6f;
-    margin-bottom: 8px;
 }
 
 p {
@@ -87,7 +89,6 @@ button {
     to { opacity: 1; }
 }
 
-/* cinematic screens */
 .black {
     background: black;
     color: white;
@@ -98,33 +99,46 @@ button {
     color: #f5e6c8;
 }
 
-.big {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6em;
-}
-
 .invite {
     border: 1px solid rgba(255,215,150,0.3);
-    padding: 40px 20px;
+    padding: 40px 22px;
     border-radius: 22px;
     max-width: 360px;
     width: 100%;
 }
 
-.reward {
-    background: linear-gradient(135deg, #ff3b6f, #ff7eb3);
-    color: white;
+.envelope {
     margin-top: 24px;
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,215,150,0.4);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.03);
+}
+
+.hidden {
+    opacity: 0;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.show {
+    opacity: 1;
+    animation: fadeIn 1.2s ease forwards;
 }
 </style>
 </head>
 
 <body>
 
-<!-- INITIAL -->
-<div class="screen" id="screen1">
+<!-- SCREEN 1 -->
+<div class="screen" id="s1">
     <div class="card">
-        <img src="photo.jpg" alt="Us">
+        <img src="photo.jpg">
         <h1>Labdhi 💕</h1>
         <p>This page exists because I really, really love you.</p>
         <p>Will you be my Valentine?</p>
@@ -136,15 +150,15 @@ button {
     </div>
 </div>
 
-<!-- CINEMATIC PAUSE -->
-<div class="screen black" id="screen2" style="display:none;">
+<!-- SCREEN 2 -->
+<div class="screen black" id="s2" style="display:none;">
     <div class="big fade">
         This is where our story pauses…<br>just for a moment.
     </div>
 </div>
 
-<!-- LOVE LETTER -->
-<div class="screen" id="screen3" style="display:none;">
+<!-- SCREEN 3 -->
+<div class="screen" id="s3" style="display:none;">
     <div class="big fade">
         I don’t want just a Valentine.<br><br>
         I want a thousand ordinary days…<br><br>
@@ -152,51 +166,80 @@ button {
     </div>
 </div>
 
-<!-- LUXURY INVITE -->
-<div class="screen gold" id="screen4" style="display:none;">
+<!-- SCREEN 4 -->
+<div class="screen gold" id="s4" style="display:none;">
     <div class="invite fade">
-        <div class="big">Invitation</div><br>
+        <div class="big">A Private Invitation</div><br>
         Valentine’s Date<br><br>
-        <strong>LABDHI WITH HER DREAM BOY KRISH</strong><br><br>
+        <strong>Labdhi & You</strong><br><br>
         Status: Confirmed ✔<br><br>
-        <button class="reward" onclick="unlock()">Unlock your Valentine’s reward 🎁</button>
-        <div id="rewardText"></div>
+
+        <div id="fakeEnd" class="fade">That’s it.</div>
+        <div id="jk" style="display:none;" class="fade">
+            Just kidding.<br>One more thing…
+        </div>
+
+        <div id="envelope" class="envelope" style="display:none;">
+            ✉️ Tap to open
+        </div>
+
+        <div id="reward" class="fade" style="display:none;">
+            🎟️ Coupons for <br><strong>IYKYK 😌</strong><br>
+            <small>Valid forever. Non-transferable.</small>
+        </div>
+
+        <div id="secretHint" class="hidden">
+            Tap once more.
+        </div>
+
+        <div id="secret" class="hidden">
+            <strong>You’re the Best Decision of My Life ❤️</strong>
+        </div>
     </div>
 </div>
 
+<!-- Sounds -->
+<audio id="tapSound" src="https://assets.mixkit.co/sfx/preview/mixkit-soft-click-1124.mp3"></audio>
+<audio id="chimeSound" src="https://assets.mixkit.co/sfx/preview/mixkit-melodic-bell-chime-713.mp3"></audio>
+
 <script>
-let noTries = 0;
+let noCount = 0;
 
 function hideNo(btn) {
-    noTries++;
-    btn.style.transform = `scale(${1 - noTries*0.2})`;
-    if (noTries >= 3) btn.remove();
+    noCount++;
+    btn.style.transform = `scale(${1 - noCount*0.2})`;
+    if (noCount >= 3) btn.remove();
 }
 
 function start() {
-    document.getElementById("screen1").style.display = "none";
-    document.getElementById("screen2").style.display = "flex";
+    document.getElementById("tapSound").play();
+    s1.style.display = "none";
+    s2.style.display = "flex";
 
-    setTimeout(() => {
-        document.getElementById("screen2").style.display = "none";
-        document.getElementById("screen3").style.display = "flex";
-    }, 2500);
+    setTimeout(()=>{ s2.style.display="none"; s3.style.display="flex"; }, 2500);
+    setTimeout(()=>{ s3.style.display="none"; s4.style.display="flex"; }, 5200);
 
-    setTimeout(() => {
-        document.getElementById("screen3").style.display = "none";
-        document.getElementById("screen4").style.display = "flex";
-    }, 5200);
+    setTimeout(()=>{
+        fakeEnd.style.display="none";
+        jk.style.display="block";
+    }, 7500);
+
+    setTimeout(()=>{
+        envelope.style.display="block";
+    }, 9500);
 }
 
-function unlock() {
-    document.querySelector(".reward").remove();
-    document.getElementById("rewardText").innerHTML = `
-        <p class="fade" style="margin-top:20px;">
-            🎟️ Coupons for <br>
-            <strong>IYKYK 😌</strong><br><br>
-            <small>Valid forever. Non-transferable.</small>
-        </p>
-    `;
+envelope.onclick = () => {
+    document.getElementById("chimeSound").play();
+    envelope.style.display="none";
+    reward.style.display="block";
+    secretHint.classList.add("show");
+}
+
+document.getElementById("s4").onclick = () => {
+    if (reward.style.display === "block") {
+        secret.classList.add("show");
+    }
 }
 </script>
 
