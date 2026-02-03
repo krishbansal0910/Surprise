@@ -4,316 +4,199 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Labdhi, Be My Valentine 💖</title>
+<title>Labdhi 💖</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-:root {
-    --pink: #ff3b6f;
-    --soft-pink: #ff7eb3;
-    --bg: linear-gradient(135deg, #ff758c, #ff7eb3);
-}
-
-* {
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
     min-height: 100vh;
-    background: var(--bg);
+    overflow-y: auto;
+}
+
+.screen {
+    min-height: 100vh;
+    padding: 40px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Inter', sans-serif;
-    overflow: hidden;
-}
-
-/* floating glow particles */
-.particle {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background: rgba(255,255,255,0.4);
-    border-radius: 50%;
-    animation: floatUp 12s linear infinite;
-}
-
-@keyframes floatUp {
-    from {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(-10vh);
-        opacity: 1;
-    }
-}
-
-/* Card */
-.card {
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(10px);
-    padding: 22px;
-    border-radius: 28px;
-    width: 90%;
-    max-width: 360px;
     text-align: center;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
-    animation: cardEnter 1.2s ease;
 }
 
-@keyframes cardEnter {
-    from {
-        transform: translateY(30px) scale(0.95);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
+.card {
+    background: white;
+    border-radius: 28px;
+    padding: 24px;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
 }
 
 .card img {
     width: 100%;
     border-radius: 18px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 }
 
 h1 {
     font-family: 'Playfair Display', serif;
-    color: var(--pink);
-    font-size: 1.9em;
-    margin: 6px 0;
+    color: #ff3b6f;
+    margin-bottom: 8px;
 }
 
 p {
-    font-size: 0.95em;
     color: #555;
-    line-height: 1.5;
+    font-size: 0.95em;
+    line-height: 1.6;
 }
 
-/* Buttons */
 .buttons {
-    position: relative;
-    height: 120px;
-    margin-top: 20px;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 button {
-    padding: 13px 28px;
+    padding: 14px;
     border-radius: 30px;
     border: none;
     font-size: 0.95em;
     cursor: pointer;
-    position: absolute;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .yes {
-    background: linear-gradient(135deg, var(--pink), var(--soft-pink));
+    background: linear-gradient(135deg, #ff3b6f, #ff7eb3);
     color: white;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    box-shadow: 0 10px 25px rgba(255,59,111,0.35);
 }
 
 .no {
-    background: #ececec;
+    background: #eee;
     color: #444;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
 }
 
-button:active {
-    transform: scale(0.95);
+.fade {
+    animation: fadeIn 1.2s ease forwards;
 }
 
-/* Premium final screen */
-.title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2em;
-    margin-bottom: 8px;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.love {
-    margin: 14px 0;
-    font-weight: 500;
-}
-
-.lock {
-    margin: 16px 0;
-    font-size: 0.9em;
-    opacity: 0.85;
-}
-
-.lock span {
-    display: block;
-    font-size: 1.1em;
-    margin-top: 6px;
-}
-
-/* Reward */
-.reward-btn {
-    background: linear-gradient(135deg, var(--pink), var(--soft-pink));
+/* cinematic screens */
+.black {
+    background: black;
     color: white;
-    padding: 14px 30px;
-    border-radius: 30px;
-    box-shadow: 0 12px 28px rgba(255,59,111,0.35);
-    margin-top: 16px;
 }
 
-.coupon {
-    margin-top: 22px;
-    padding: 20px;
+.gold {
+    background: radial-gradient(circle at top, #2b2b2b, #000);
+    color: #f5e6c8;
+}
+
+.big {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6em;
+}
+
+.invite {
+    border: 1px solid rgba(255,215,150,0.3);
+    padding: 40px 20px;
     border-radius: 22px;
-    background: linear-gradient(135deg, #fff0f6, #ffe4ef);
-    animation: fadeUp 0.7s ease;
+    max-width: 360px;
+    width: 100%;
 }
 
-.coupon span {
-    display: block;
-    margin-top: 6px;
-    font-size: 1.3em;
-    font-weight: 600;
-    color: var(--pink);
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.reward {
+    background: linear-gradient(135deg, #ff3b6f, #ff7eb3);
+    color: white;
+    margin-top: 24px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
-    <img src="photo.jpg" alt="Us ❤️">
+<!-- INITIAL -->
+<div class="screen" id="screen1">
+    <div class="card">
+        <img src="photo.jpg" alt="Us">
+        <h1>Labdhi 💕</h1>
+        <p>This page exists because I really, really love you.</p>
+        <p>Will you be my Valentine?</p>
 
-    <h1>Labdhi 💕</h1>
-    <p>This page exists because I really, really love you.</p>
-    <p>So… will you be my Valentine?</p>
+        <div class="buttons">
+            <button class="yes" onclick="start()">YES 💖</button>
+            <button class="no" onclick="hideNo(this)">NO 🙈</button>
+        </div>
+    </div>
+</div>
 
-    <div class="buttons">
-        <button class="yes" id="yesBtn">YES 💖</button>
-        <button class="no" id="noBtn">NO 🙈</button>
+<!-- CINEMATIC PAUSE -->
+<div class="screen black" id="screen2" style="display:none;">
+    <div class="big fade">
+        This is where our story pauses…<br>just for a moment.
+    </div>
+</div>
+
+<!-- LOVE LETTER -->
+<div class="screen" id="screen3" style="display:none;">
+    <div class="big fade">
+        I don’t want just a Valentine.<br><br>
+        I want a thousand ordinary days…<br><br>
+        With you.
+    </div>
+</div>
+
+<!-- LUXURY INVITE -->
+<div class="screen gold" id="screen4" style="display:none;">
+    <div class="invite fade">
+        <div class="big">A Private Invitation</div><br>
+        Valentine’s Date<br><br>
+        <strong>Labdhi & You</strong><br><br>
+        Status: Confirmed ✔<br><br>
+        <button class="reward" onclick="unlock()">Unlock your Valentine’s reward 🎁</button>
+        <div id="rewardText"></div>
     </div>
 </div>
 
 <script>
-/* floating particles */
-for (let i = 0; i < 25; i++) {
-    const p = document.createElement("div");
-    p.className = "particle";
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.animationDuration = (8 + Math.random() * 8) + "s";
-    document.body.appendChild(p);
+let noTries = 0;
+
+function hideNo(btn) {
+    noTries++;
+    btn.style.transform = `scale(${1 - noTries*0.2})`;
+    if (noTries >= 3) btn.remove();
 }
 
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
+function start() {
+    document.getElementById("screen1").style.display = "none";
+    document.getElementById("screen2").style.display = "flex";
 
-let tries = 0;
-let scale = 1;
+    setTimeout(() => {
+        document.getElementById("screen2").style.display = "none";
+        document.getElementById("screen3").style.display = "flex";
+    }, 2500);
 
-function moveNo() {
-    tries++;
-    scale -= 0.18;
-
-    const x = Math.random() * 160 - 80;
-    const y = Math.random() * 70 - 35;
-
-    noBtn.style.transform =
-        `translate(${x}px, ${y}px) scale(${scale})`;
-
-    if (tries >= 3) {
-        noBtn.remove();
-    }
+    setTimeout(() => {
+        document.getElementById("screen3").style.display = "none";
+        document.getElementById("screen4").style.display = "flex";
+    }, 5200);
 }
 
-noBtn.addEventListener("click", moveNo);
-noBtn.addEventListener("touchstart", moveNo);
-
-yesBtn.addEventListener("click", yesClicked);
-yesBtn.addEventListener("touchstart", yesClicked);
-
-function yesClicked() {
-    confettiBoom();
-
-    document.getElementById("card").innerHTML = `
-        <h1 class="title">Finally 😌💞</h1>
-
-        <p>You made the right choice after three tries.</p>
-
-        <p class="love">
-            This page exists because I really, really love you ❤️
+function unlock() {
+    document.querySelector(".reward").remove();
+    document.getElementById("rewardText").innerHTML = `
+        <p class="fade" style="margin-top:20px;">
+            🎟️ Coupons for <br>
+            <strong>IYKYK 😌</strong><br><br>
+            <small>Valid forever. Non-transferable.</small>
         </p>
-
-        <div class="lock">
-            Valentine’s date locked
-            <span>💖 You & Me </span>
-        </div>
-
-        <button class="reward-btn" id="rewardBtn">
-            Claim your Valentine’s reward 🎁
-        </button>
-
-        <div id="rewards"></div>
     `;
-
-    document.getElementById("rewardBtn")
-        .addEventListener("click", showRewards);
-}
-
-function showRewards() {
-    document.getElementById("rewardBtn").remove();
-
-    document.getElementById("rewards").innerHTML = `
-        <div class="coupon">
-            🎟️ Coupons for
-            <span>IYKYK 😌</span>
-            <p style="font-size:0.85em; opacity:0.7; margin-top:6px;">
-                Valid forever. Non-transferable.
-            </p>
-        </div>
-    `;
-}
-
-/* Confetti */
-function confettiBoom() {
-    for (let i = 0; i < 90; i++) {
-        const c = document.createElement("div");
-        c.style.position = "fixed";
-        c.style.left = "50%";
-        c.style.top = "50%";
-        c.style.width = "7px";
-        c.style.height = "7px";
-        c.style.background =
-            ["#ff3b6f","#ffd166","#06d6a0","#118ab2"][Math.floor(Math.random()*4)];
-        c.style.borderRadius = "50%";
-        document.body.appendChild(c);
-
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 220;
-
-        c.animate([
-            { transform: "translate(0,0)", opacity: 1 },
-            { transform: `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px)`, opacity: 0 }
-        ], { duration: 1200 });
-
-        setTimeout(() => c.remove(), 1300);
-    }
 }
 </script>
 
