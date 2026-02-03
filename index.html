@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Labdhi 💖</title>
 
@@ -14,23 +14,24 @@ body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
     min-height: 100vh;
-    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .screen {
     min-height: 100vh;
-    padding: 40px 20px;
+    padding: 60px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
+/* ---------- INITIAL CARD ---------- */
 .card {
     background: white;
-    border-radius: 28px;
+    border-radius: 30px;
     padding: 26px;
-    max-width: 360px;
+    max-width: 380px;
     width: 100%;
     box-shadow: 0 30px 80px rgba(0,0,0,0.25);
 }
@@ -38,25 +39,23 @@ body {
 .card img {
     width: 100%;
     border-radius: 18px;
-    margin-bottom: 16px;
-}
-
-h1, .big {
-    font-family: 'Playfair Display', serif;
+    margin-bottom: 18px;
 }
 
 h1 {
+    font-family: 'Playfair Display', serif;
     color: #ff3b6f;
+    font-size: 2em;
 }
 
 p {
     color: #555;
-    font-size: 0.95em;
+    font-size: 1em;
     line-height: 1.6;
 }
 
 .buttons {
-    margin-top: 24px;
+    margin-top: 28px;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -66,7 +65,7 @@ button {
     padding: 14px;
     border-radius: 30px;
     border: none;
-    font-size: 0.95em;
+    font-size: 1em;
     cursor: pointer;
 }
 
@@ -80,55 +79,69 @@ button {
     color: #444;
 }
 
-.fade {
-    animation: fadeIn 1.2s ease forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
+/* ---------- CINEMATIC SCREENS ---------- */
 .black {
     background: black;
     color: white;
 }
 
+.big {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8em, 4vw, 2.8em);
+    line-height: 1.4;
+    max-width: 700px;
+}
+
+/* ---------- LUXURY INVITE ---------- */
 .gold {
     background: radial-gradient(circle at top, #2b2b2b, #000);
     color: #f5e6c8;
 }
 
 .invite {
-    border: 1px solid rgba(255,215,150,0.3);
-    padding: 40px 22px;
-    border-radius: 22px;
-    max-width: 360px;
+    border: 1px solid rgba(255,215,150,0.35);
+    padding: 46px 26px;
+    border-radius: 26px;
+    max-width: 420px;
     width: 100%;
 }
 
+/* ---------- ENVELOPE ---------- */
 .envelope {
-    margin-top: 24px;
+    margin-top: 30px;
     padding: 18px;
     border-radius: 18px;
-    border: 1px solid rgba(255,215,150,0.4);
+    border: 1px solid rgba(255,215,150,0.45);
     cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.envelope:hover {
-    transform: scale(1.03);
-}
-
-.hidden {
     opacity: 0;
-    margin-top: 20px;
-    font-size: 0.9em;
+    transform: scale(0.9);
+    transition: all 0.6s ease;
 }
 
-.show {
+.envelope.show {
     opacity: 1;
+    transform: scale(1);
+}
+
+.envelope.open {
+    background: rgba(255,255,255,0.08);
+}
+
+/* ---------- BUTTON ---------- */
+.action {
+    margin-top: 22px;
+    background: linear-gradient(135deg, #ff3b6f, #ff7eb3);
+    color: white;
+}
+
+/* ---------- FADE ---------- */
+.fade {
+    opacity: 0;
     animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
 }
 </style>
 </head>
@@ -138,14 +151,14 @@ button {
 <!-- SCREEN 1 -->
 <div class="screen" id="s1">
     <div class="card">
-        <img src="photo.jpg">
+        <img src="photo.jpg" alt="Us">
         <h1>Labdhi 💕</h1>
         <p>This page exists because I really, really love you.</p>
         <p>Will you be my Valentine?</p>
 
         <div class="buttons">
             <button class="yes" onclick="start()">YES 💖</button>
-            <button class="no" onclick="hideNo(this)">NO 🙈</button>
+            <button class="no" onclick="shrinkNo(this)">NO 🙈</button>
         </div>
     </div>
 </div>
@@ -168,79 +181,81 @@ button {
 
 <!-- SCREEN 4 -->
 <div class="screen gold" id="s4" style="display:none;">
-    <div class="invite fade">
-        <div class="big">A Private Invitation</div><br>
-        Valentine’s Date<br><br>
-        <strong>Labdhi & You</strong><br><br>
-        Status: Confirmed ✔<br><br>
+    <div class="invite">
 
-        <div id="fakeEnd" class="fade">That’s it.</div>
-        <div id="jk" style="display:none;" class="fade">
+        <div id="inviteText" class="fade">
+            <div class="big">A Private Invitation</div><br>
+            Valentine’s Date<br><br>
+            <strong>Labdhi & You</strong><br><br>
+            Status: Confirmed ✔
+        </div>
+
+        <div id="fakeEnd" class="fade" style="margin-top:24px;">
+            That’s it.
+        </div>
+
+        <div id="jk" class="fade" style="display:none;">
             Just kidding.<br>One more thing…
         </div>
 
-        <div id="envelope" class="envelope" style="display:none;">
+        <div id="envelope" class="envelope">
             ✉️ Tap to open
         </div>
 
-        <div id="reward" class="fade" style="display:none;">
+        <div id="reward" style="display:none;" class="fade">
             🎟️ Coupons for <br><strong>IYKYK 😌</strong><br>
             <small>Valid forever. Non-transferable.</small>
         </div>
 
-        <div id="secretHint" class="hidden">
-            Tap once more.
-        </div>
+        <button id="finalBtn" class="action" style="display:none;">
+            Tap once more
+        </button>
 
-        <div id="secret" class="hidden">
-            <strong>You’re the Best Decision of My Life ❤️</strong>
+        <div id="finalMsg" style="display:none;" class="fade">
+            <br><strong>You’re the Best Decision of My Life ❤️</strong>
         </div>
     </div>
 </div>
 
-<!-- Sounds -->
-<audio id="tapSound" src="https://assets.mixkit.co/sfx/preview/mixkit-soft-click-1124.mp3"></audio>
-<audio id="chimeSound" src="https://assets.mixkit.co/sfx/preview/mixkit-melodic-bell-chime-713.mp3"></audio>
-
 <script>
 let noCount = 0;
 
-function hideNo(btn) {
+function shrinkNo(btn) {
     noCount++;
     btn.style.transform = `scale(${1 - noCount*0.2})`;
     if (noCount >= 3) btn.remove();
 }
 
 function start() {
-    document.getElementById("tapSound").play();
     s1.style.display = "none";
     s2.style.display = "flex";
 
-    setTimeout(()=>{ s2.style.display="none"; s3.style.display="flex"; }, 2500);
-    setTimeout(()=>{ s3.style.display="none"; s4.style.display="flex"; }, 5200);
+    setTimeout(() => {
+        s2.style.display = "none";
+        s3.style.display = "flex";
+    }, 2500);
 
-    setTimeout(()=>{
-        fakeEnd.style.display="none";
-        jk.style.display="block";
-    }, 7500);
+    setTimeout(() => {
+        s3.style.display = "none";
+        s4.style.display = "flex";
+    }, 5200);
 
-    setTimeout(()=>{
-        envelope.style.display="block";
-    }, 9500);
+    setTimeout(() => fakeEnd.style.display = "none", 7600);
+    setTimeout(() => jk.style.display = "block", 8000);
+    setTimeout(() => envelope.classList.add("show"), 9800);
 }
 
 envelope.onclick = () => {
-    document.getElementById("chimeSound").play();
-    envelope.style.display="none";
-    reward.style.display="block";
-    secretHint.classList.add("show");
-}
+    envelope.classList.add("open");
+    envelope.style.display = "none";
+    reward.style.display = "block";
+    finalBtn.style.display = "inline-block";
+};
 
-document.getElementById("s4").onclick = () => {
-    if (reward.style.display === "block") {
-        secret.classList.add("show");
-    }
-}
+finalBtn.onclick = () => {
+    finalBtn.remove();
+    finalMsg.style.display = "block";
+};
 </script>
 
 </body>
